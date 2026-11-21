@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { personNameSchema } from "./personName.js";
+import { personNameSchema } from "./personName.ts";
 
 const sourceIds = z.array(z.string().min(1)).min(1);
 const insight = z.object({

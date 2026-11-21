@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { personContentSchema } from "./personContent.js";
-import { parseStoryContent, storyContentSchema } from "./storyContent.js";
+import { personContentSchema } from "./personContent.ts";
+import { parseStoryContent, storyContentSchema } from "./storyContent.ts";
 
 export const publishedSourceSchema = z
   .object({

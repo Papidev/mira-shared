@@ -33,7 +33,7 @@ It ships TypeScript sources with `zod` as a peer dependency. Pin a commit:
 pnpm add github:Papidev/mira-shared#<commit>
 ```
 
-Next.js apps add `@mira/shared` to `transpilePackages`. Changing a schema changes the API contract: update Explorer before or together with the Admin.
+Internal imports use `.ts` extensions, so consumers enable `allowImportingTsExtensions` (with `noEmit`), and Next.js apps add `@mira/shared` to `transpilePackages`. Changing a schema changes the API contract: update Explorer before or together with the Admin.
 
 ## Agent skills
 

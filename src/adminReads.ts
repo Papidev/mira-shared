@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publishedPersonSchema, publishedPoiDetailSchema } from "./publishedContent.js";
+import { publishedPersonSchema, publishedPoiDetailSchema } from "./publishedContent.ts";
 const generationSchema = z.object({
   provider: z.string(),
   model: z.string(),

@@ -5,7 +5,7 @@ import {
   publishedPersonSchema,
   publishedPoiDetailSchema,
   publishedPoiSummarySchema,
-} from "./publishedContent.js";
+} from "./publishedContent.ts";
 
 const generationSchema = z
   .object({
@@ -252,6 +252,9 @@ export const typeCategoryRuleWriteSchema = z
   .strict()
   .refine((value) =>
     value.origin === "automatic"
+      ? Boolean(value.reason)
+      : value.reason === undefined && value.definitions === undefined,
+  );
 
 export const poiCategoriesBaselineSchema = z.object({
   poiId: z.uuid().toLowerCase(),
