@@ -1,0 +1,14 @@
+{
+  "name": "@mira/shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Content API schemas and agent skills shared by Mira Admin and Mira Explorer.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": ["src", "skills"],
+  "peerDependencies": {
+    "zod": "^4.4.3"
+  }
+}
