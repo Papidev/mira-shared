@@ -4,6 +4,12 @@ Code and CI steps shared by [mira-admin](https://github.com/Papidev/mira-admin) 
 
 ## CI actions
 
+- `setup`: installs pnpm 10.18.0 and Node.js 24, then runs `pnpm install --frozen-lockfile`. Use it after `actions/checkout`:
+
+  ```yaml
+  - uses: Papidev/mira-shared/.github/actions/setup@main
+  ```
+
 - `changed`: reports whether a push or pull request changed the given paths, so checks can skip documentation-only changes. Use it after `actions/checkout` with `fetch-depth: 0`:
 
   ```yaml
