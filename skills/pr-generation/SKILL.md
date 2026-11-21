@@ -1,6 +1,6 @@
 ---
 name: pr-generation
-description: Shared Mira conventions for preparing, creating or updating pull requests. Loaded through each repository's own pr-generation skill, which adds that repository's body format and release steps.
+description: Shared Mira conventions for preparing, creating or updating pull requests. Loaded through each repository's own pr-generation skill, which adds that repository's own steps.
 ---
 
 # PR generation
@@ -22,7 +22,37 @@ Keep the title concise and scoped to the PR's main change. Choose one prefix eve
 
 ## Body
 
-Follow the repository's own body format. In every format, keep each point understandable without the conversation, summarize the verification actually performed, and describe material risks or limitations plainly instead of using labels such as door, blast radius or merge danger. Leave session history and unrelated operational work out.
+Use this format for every Mira PR, including when the generic `pr` skill is also loaded; it takes precedence over that skill's template.
+
+```markdown
+<One or two sentences on the purpose and resulting behavior, for a reviewer who has not read the conversation.>
+
+## Before / After
+
+- **Before:** <previous problem or behavior>
+- **After:** <resulting capability or behavior>
+
+## Changes
+
+- <related behavior grouped together, and why it matters>
+
+## Current limits
+
+- <concrete limitation or remaining work needed to understand this scope>
+
+## Verification
+
+- <check actually performed and its result>
+
+Part of Papidev/mira-explorer#<issue>.
+```
+
+- Write in plain English with familiar words; explain unavoidable technical terms. Keep each bullet short and understandable without the conversation.
+- Scale the detail to the change and omit empty sections; omit Current limits when there is no material limitation. Group related behavior instead of listing every file or step.
+- Describe risks and limitations plainly, without labels such as door, blast radius or merge danger. Keep future plans out unless needed to understand the scope.
+- Summarize only verification actually performed, and distinguish earlier results from checks run now. For documentation-only changes, a brief diff-review statement is enough.
+- Use screenshots or diagrams only when they explain something the bullets cannot.
+- Leave out placeholders, session history, unrelated operational work and release bookkeeping already clear from the diff.
 
 Link the originating issue with its repository name (for example `Papidev/mira-explorer#355`); use a closing keyword only when the PR completes that issue. When using a GitHub connector, pass actual newlines and leave a blank line before Markdown lists.
 
