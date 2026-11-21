@@ -1,15 +1,20 @@
 name: Set up pnpm project
-description: Installs pnpm and Node.js with the versions both Mira repositories use, then installs dependencies from the lockfile.
+description: >-
+  Installs the repository's pnpm (from packageManager in package.json) and Node.js versions,
+  then installs dependencies from the lockfile.
+
+inputs:
+  node-version-file:
+    description: File with the Node.js version, such as .nvmrc or package.json (engines.node).
+    default: package.json
 
 runs:
   using: composite
   steps:
     - uses: pnpm/action-setup@v6
-      with:
-        version: 10.18.0
     - uses: actions/setup-node@v7
       with:
-        node-version: 24
+        node-version-file: ${{ inputs.node-version-file }}
         cache: pnpm
     - shell: bash
       run: pnpm install --frozen-lockfile
