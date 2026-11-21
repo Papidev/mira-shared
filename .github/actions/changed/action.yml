@@ -1,0 +1,41 @@
+name: Changed paths
+description: >-
+  Reports whether a push or pull request changed any of the given paths.
+  Needs a checkout with full history.
+
+inputs:
+  paths:
+    description: Git pathspecs, one per line. The default matches everything except documentation and repository settings that no check reads.
+    default: |
+      .
+      :!docs/
+      :!README.md
+      :!AGENTS.md
+      :!.agents/
+      :!.github/dependabot.yml
+
+outputs:
+  changed:
+    description: "'true' when the paths changed, or when there is no usable base (manual runs, new branches)."
+    value: ${{ steps.diff.outputs.changed }}
+
+runs:
+  using: composite
+  steps:
+    - id: diff
+      shell: bash
+      env:
+        EVENT_NAME: ${{ github.event_name }}
+        CHANGE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        PATHS: ${{ inputs.paths }}
+      run: |
+        mapfile -t paths < <(grep . <<< "$PATHS")
+        changed=true
+        if [ "$EVENT_NAME" != "workflow_dispatch" ] &&
+          [ -n "$CHANGE_BASE" ] &&
+          [ "$CHANGE_BASE" != "0000000000000000000000000000000000000000" ] &&
+          git diff --quiet --no-renames "$CHANGE_BASE" HEAD -- "${paths[@]}"; then
+          changed=false
+        fi
+        echo "changed=$changed" >> "$GITHUB_OUTPUT"
+        echo "Changed: $changed"
