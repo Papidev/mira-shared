@@ -6,7 +6,7 @@ const generationSchema = z.object({
   completedAt: z.iso.datetime(),
 });
 
-export const adminPersonProfileSchema = z.object({
+export const adminSavedPersonSchema = z.object({
   personId: z.string().min(1),
   wikidataId: z.string().regex(/^Q[1-9]\d*$/),
   profileVersion: z.uuid(),
